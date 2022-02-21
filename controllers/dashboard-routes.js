@@ -23,10 +23,25 @@ router.get('/', withAuth, async (req, res) => {
 
 router.get('/new', withAuth, (req, res) => {
   // Create the correct get route
+  res.render('new-post', {
+    layout: 'dashboard'
+  })
 });
 
 router.get('/edit/:id', withAuth, async (req, res) => {
   // Create the correct get route functionality using an asychronous function
+  try {
+    const postData = await Post.findByPk(req.params.id)
+    if (postData) {
+      const post = postData.get({plain: true})
+      res.render('edit-post', {
+        layout: 'dashboard',
+        post
+      })
+    }
+  } catch (error) {
+    res.redirect('login')
+  }
 });
 
 module.exports = router;
