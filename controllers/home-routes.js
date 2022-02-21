@@ -11,7 +11,7 @@ router.get('/', async (req, res) => {
       res.render('all-post', {posts})
 
   } catch (error) {
-      res.json(err)
+      res.json(error)
   }
 });
 
@@ -33,7 +33,7 @@ router.get('/post/:id', async (req, res) => {
             res.render('single-post', {post})
         }
     } catch (error) {
-        res.json(err)
+        res.json(error)
     } 
 });
 
